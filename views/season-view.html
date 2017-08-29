@@ -1,9 +1,9 @@
-<div class="row about-intro">
+<div class="row contents">
             <div class="home-content-left1">
             	<center><h1 >Teams	</h1></center>
                 <center><div style="display: inline-block; padding-right: 1.5px; padding-left: 1.5px; " ng-repeat='team in currentSeason.teams'>
-                	<a class='button1' href="https://stackoverflow.com/questions/2906582/how-to-create-an-html-button-that-acts-like-a-link">{{team}}</a>	
+                	<a class='button1'  ng-href="#/season/{{currentSeason.eplName}}/{{team}}">{{team}}</a>	
                 </div></center>
             </div>                       
-            
+            	
         </div>

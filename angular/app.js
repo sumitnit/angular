@@ -5,8 +5,6 @@ var myApp = angular.module('eplApp',['ngRoute']);
 
 myApp.service('myservice',function(){
   var _xxx = {};
-  var main=this;
-
 return {
     getXxx: function () {
         return _xxx;
@@ -15,7 +13,7 @@ return {
         _xxx = value;
     }
 };
-})
+})// end of myservice
 
 myApp.controller('mainController',['$http',function($http){
 
@@ -68,6 +66,7 @@ this.loadAllseasons();
 myApp.controller('seasonController',['$http','$routeParams',function($http,$routeParams)
 {
   var main=this;
+  this.eplName=$routeParams.eplID;
   this.eplID=$routeParams.eplID.substring(23);
   this.seasonMatch=[];
   this.teams=[];
@@ -92,7 +91,7 @@ myApp.controller('seasonController',['$http','$routeParams',function($http,$rout
 //end of seasonController
 
 
-myApp.controller('teamController',['$http','$rootScope','$routeParams',function($http,$rootScope,$routeParams,){
+myApp.controller('teamController',['$http','myservice','$routeParams',function($http,myservice,$routeParams){
       var main= this;
       this.code=$routeParams.code;
       this.eplID=$routeParams.eplId.substring(23);
@@ -100,7 +99,7 @@ myApp.controller('teamController',['$http','$rootScope','$routeParams',function(
       this.matchWin=0;
       this.matchLose=0;
       this.matchDraw=0;
-      $rootScope.seasonMatch=[];
+      this.seasonMatch=[];
       this.teamName='';
       this.teamMatch=[];
       this.totalScore=0;
@@ -160,8 +159,8 @@ myApp.controller('teamController',['$http','$rootScope','$routeParams',function(
         console.log(main.matchDraw);
         console.log(main.matchLose);
         }).then(function AddToService(){  
-       // myservice.setXxx(main.seasonMatch);
-        //console.log(myservice.getXxx());  
+        myservice.setXxx(main.seasonMatch);
+        console.log(myservice.getXxx());  
       })};
 
 
@@ -170,20 +169,6 @@ myApp.controller('teamController',['$http','$rootScope','$routeParams',function(
 }]);//end of teamController
 
 
-myApp.controller('teamController1',['$scope','$rootScope',function($scope,$rootScope){
-
-  var main=this;
-  console.log($rootScope.seasonMatch);
-  //$scope.$watch('myservice.getXxx()',function(newValue,OldValue){
-    //console.log(OldValue);
-  //},true);
-
-  //this.func=function()
-  //{
-  //  console.log(myservice.getXxx());
-  //}
-
-  //this.func();
-  
-
+myApp.controller('teamController1',['myservice',function(myservice){
+  console.log(myservice.getXxx());
 }]);//end of teamController1
