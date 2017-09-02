@@ -1,15 +1,14 @@
 <div class="row contents">
             <div class="home-content-left1">
-            	<center><h1 >Teams	</h1></center>
-                <center><div style="display: inline-block; padding-right: 1.5px; padding-left: 1.5px; ">
+            	<center><h1 >{{currentTeam.teamName}}	</h1></center>
+                <div style="display: inline-block;text-align: center; padding: 1.5px 1.5px 1.5px 1.5px; ">
+                <span style="font-size: 20px; text-align: left; "> Total Matches Played : {{currentTeam.allMatch}}</span><br />
+                <span style="font-size: 20px; text-align: left;"> Total Matches Win : {{currentTeam.matchWin}}</span><br/>
+                <span style="font-size: 20px; text-align: left;"> Total Matches Draw : {{currentTeam.matchDraw}}</span><br/>
+                <span style="font-size: 20px; text-align: left;"> Total Matches Lose : {{currentTeam.matchLose}}</span><br/>
 
-                <span> Total Matches Played : {{currentTeam.allMatch}}</span><br />
-                <span> Total Matches Win : {{currentTeam.matchWin}}</span><br/>
-                <span> Total Matches Draw : {{currentTeam.matchDraw}}</span><br/>
-                <span> Total Matches Lose : {{currentTeam.matchLose}}</span><br/>
-
-                <span><a ng-href="#/singlematch">Click Here to See each Match</a></span>
-                </div></center>
+                <span><a class ="button1" style="font-size: 20px" ng-href="#/singlematch">Click Here to See each Match</a></span>
+                </div>
             </div>                       
             
         </div>

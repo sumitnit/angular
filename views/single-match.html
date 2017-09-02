@@ -1,12 +1,9 @@
 <div class="row about-intro">
             <div class="home-content-left1">
-            	<center><h1 >Teams	</h1></center>
-                <center><div style="display: inline-block; padding-right: 1.5px; padding-left: 1.5px; ">
-
-
-
-                <span><a ng-href="#/singlematch">Click Here to See each Match</a></span>
-                </div></center>
+            	<center><h1 >{{currentTeam1.teamName}}</h1></center>
+                <div style="display: block; padding-right: 1.5px; padding-left: 1.5px; text-align: justify-all;" ng-repeat='matches in currentTeam1.teamMatch'>
+                    <span class="button2">{{matches.date|date1}} <span style="padding-left: 5px; color: blue; font-size: 18px;">  {{matches.team1.code}}({{matches.team1.name}})-{{matches.score1}} vs {{matches.score2}}-{{matches.team2.code}}({{matches.team2.name}})</span></span>                
+                </div>
             </div>                       
             
         </div>

@@ -4,13 +4,17 @@ var myApp = angular.module('eplApp',['ngRoute']);
 
 
 myApp.service('myservice',function(){
-  var _xxx = {};
+  var _xxx = {
+    match:'',
+    name:''
+  };
 return {
     getXxx: function () {
         return _xxx;
     },
-    setXxx: function (value) {
-        _xxx = value;
+    setXxx: function (value1, value2) {
+        _xxx.match = value1;
+        _xxx.name = value2;
     }
 };
 })// end of myservice
@@ -50,7 +54,7 @@ this.loadAllseasons=function(){
           i=i.replace("/","-");
           main.allseason.push(i);
           main.allmatches.push(response.data);
-          console.log(main.allmatches);
+          //console.log(main.allmatches);
         }, function errorCallback(response) {
           // called asynchronously if an error occurs
           // or server returns response with an error status.
@@ -80,7 +84,7 @@ myApp.controller('seasonController',['$http','$routeParams',function($http,$rout
             main.teams.push(main.seasonMatch.rounds[0].matches[i].team1.code);
             main.teams.push(main.seasonMatch.rounds[0].matches[i].team2.code);
           }
-          console.log(main.teams);
+          //console.log(main.teams);
         }, function errorCallback(response) {
           alert("some error occurred. Check the console.");
           console.log(response);
@@ -103,6 +107,7 @@ myApp.controller('teamController',['$http','myservice','$routeParams',function($
       this.teamName='';
       this.teamMatch=[];
       this.totalScore=0;
+      this.teamName='';
       this.baseUrl='https://raw.githubusercontent.com/openfootball/football.json/master';
       this.teamView=function(){
         $http({
@@ -118,7 +123,7 @@ myApp.controller('teamController',['$http','myservice','$routeParams',function($
           {
                 if(x[i].matches[j].team1.code==main.code || x[i].matches[j].team2.code==main.code )
                 {
-
+                    main.teamName=x[i].matches[j].team1.name;
                     main.allMatch++;
                     main.teamMatch.push(x[i].matches[j]);
                     if (x[i].matches[j].team1.code==main.code) 
@@ -154,13 +159,13 @@ myApp.controller('teamController',['$http','myservice','$routeParams',function($
                 }
           }
         }
-        console.log(main.teamMatch);
-        console.log(main.matchWin);
-        console.log(main.matchDraw);
-        console.log(main.matchLose);
+        //console.log(main.teamMatch);
+        //console.log(main.matchWin);
+        //console.log(main.matchDraw);
+        //console.log(main.matchLose);
         }).then(function AddToService(){  
-        myservice.setXxx(main.seasonMatch);
-        console.log(myservice.getXxx());  
+        myservice.setXxx(main.teamMatch, main.teamName);
+        //console.log(myservice.getXxx());  
       })};
 
 
@@ -170,5 +175,22 @@ myApp.controller('teamController',['$http','myservice','$routeParams',function($
 
 
 myApp.controller('teamController1',['myservice',function(myservice){
-  console.log(myservice.getXxx());
+  var obj=myservice.getXxx();
+  this.teamMatch=obj.match;
+  this.teamName=obj.name;
+  console.log(this.teamMatch);
+  console.log(this.teamName);
+
+
 }]);//end of teamController1
+
+
+
+myApp.filter('date1',function(){
+  return function(input)
+  {
+    var arr=input.split('-');
+    input=arr[2]+'-'+arr[1]+'-'+arr[0];
+    return input;
+  }
+})

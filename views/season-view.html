@@ -1,9 +1,13 @@
 <div class="row contents">
             <div class="home-content-left1">
             	<center><h1 >Teams	</h1></center>
-                <center><div style="display: inline-block; padding-right: 1.5px; padding-left: 1.5px; " ng-repeat='team in currentSeason.teams'>
-                	<a class='button1'  ng-href="#/season/{{currentSeason.eplName}}/{{team}}">{{team}}</a>	
-                </div></center>
+                <center>
+                	<div>
+                		<div style="display: inline-block; padding: 1.5px 1.5px 5px 1.5px; " ng-repeat='team in currentSeason.teams'>
+                		<a class='button1'  ng-href="#/season/{{currentSeason.eplName}}/{{team}}">{{team}}</a>	
+                		</div>
+                	</div>
+                </center>
             </div>                       
             	
         </div>
